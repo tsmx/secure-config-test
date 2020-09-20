@@ -1,0 +1,12 @@
+{
+  "name": "secure-config-test",
+  "version": "1.0.0",
+  "description": "Test project for using @tsmx/secure-config including Docker/Kubernetes",
+  "main": "app.js",
+  "author": "tsmx <dev@tsmx.net>",
+  "license": "MIT",
+  "dependencies": {
+    "@tsmx/secure-config": "^1.1.2",
+    "express": "^4.17.1"
+  }
+}
