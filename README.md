@@ -1,14 +1,16 @@
 # secure-config-test
 
-Test project for using [@tsmx/secure-config](https://github.com/tsmx/secure-config) including Docker/Kubernetes.
+Test project for using [@tsmx/secure-config](https://www.npmjs.com/package/@tsmx/secure-config) including Docker/Kubernetes.
+
+To get all information about the secure-config package also check out the [full documentation](https://tsmx.net/secure-config/).
 
 ## What it does
 
-Starts a simple service on port 3000 and returns the loaded configuration on `GET /`. The configuration only contains one encrypted entry `test-entry` which would return the following values:
+Starts a simple service on `http://localhost:3000/` and returns the loaded configuration JSON on `GET /`. The provided sample configuration only contains one encrypted entry `test-entry` which would return the following values:
 
 - Development stage
   - NODE_ENV: not set
-  - return value: `test-value`
+  - decrypted value: `test-value`
   - original configuration file:
     ```json
     {
@@ -17,7 +19,7 @@ Starts a simple service on port 3000 and returns the loaded configuration on `GE
     ```
 - Production stage
   - NODE_ENV: `production`
-  - return value: `test-value-production`
+  - decrypted value: `test-value-production`
   - original configuration file:
     ```json
     {
@@ -27,7 +29,7 @@ Starts a simple service on port 3000 and returns the loaded configuration on `GE
 
 The encryption key used is 32 times zero: `00000000000000000000000000000000`. See the sections below on how to set it according to the environment you run the test in (local/Docker/Kubernetes).
 
-The expected result when calling the service is:
+The expected result when calling the service at `http://localhost:3000/` is:
 
 Without having NODE_ENV set...
 ```json
