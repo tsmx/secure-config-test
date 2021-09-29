@@ -1,4 +1,9 @@
-const conf = require('@tsmx/secure-config')();
+const validateHmac = (process.env.NODE_ENV === 'production');
+const confOptions = {
+    hmacValidation: validateHmac
+}
+const conf = require('@tsmx/secure-config')(confOptions);
+
 var express = require('express');
 var app = express();
 
