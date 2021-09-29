@@ -1,4 +1,4 @@
-const conf = require('@tsmx/secure-config');
+const conf = require('@tsmx/secure-config')();
 var express = require('express');
 var app = express();
 
