@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secure-config-test-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: secure-config-test
+  template:
+    metadata:
+      labels:
+        component: secure-config-test
+    spec:
+      containers:
+        - name: config-test
+          image: tsmx/secure-config-test
+          ports:
+            - containerPort: 3000
+          env:
+            - name: CONFIG_ENCRYPTION_KEY
+              value: '00000000000000000000000000000000'
