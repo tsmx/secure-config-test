@@ -89,3 +89,18 @@ If you want to create a Docker image on your own, the needed dockerfile is provi
 ## Testing with Kubernetes
 
 Coming soon...
+
+Temporary hints:
+
+```bash
+kubectl create secret generic configuration --from-literal encryptionkey=00000000000000000000000000000000
+```
+
+```yaml
+env:
+  - name: CONFIG_ENCRYPTION_KEY
+    valueFrom:
+      secretKeyRef:
+        name: configuration
+        key: encryptionkey
+```
