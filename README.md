@@ -89,7 +89,11 @@ docker run --d -env CONFIG_ENCRYPTION_KEY=00000000000000000000000000000000 --env
 {"test-entry":"test-value-production","__hmac":"b6a06dbae73b1718a3fd38bce9b1343ad0933645f92cc77f33e220e3b3896577"}
 ```
 
-If you want to create a Docker image on your own, the needed dockerfile is provided in the repository.
+If you want to create a Docker image on your own, the needed dockerfile is provided in the repositories main folder. To build the image simply run:
+
+```bash
+docker build -t tsmx/secure-config-test .
+```
 
 ## Testing with Kubernetes
 
