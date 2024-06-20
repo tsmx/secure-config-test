@@ -75,8 +75,12 @@ Simply run the provided [image from docker-hub](https://hub.docker.com/r/tsmx/se
 For running in Development stage:
 
 ```bash
-docker run -d --env CONFIG_ENCRYPTION_KEY=00000000000000000000000000000000 -p 3000:3000 tsmx/secure-config-test
-# Container-ID returned
+docker run -d \
+  --env CONFIG_ENCRYPTION_KEY=00000000000000000000000000000000 \
+  -p 3000:3000 \
+  tsmx/secure-config-test
+```
+```bash
 curl localhost:3000
 {"test-entry":"test-value"}
 ```
@@ -84,12 +88,19 @@ curl localhost:3000
 For running in Production stage:
 
 ```bash
-docker run --d -env CONFIG_ENCRYPTION_KEY=00000000000000000000000000000000 --env NODE_ENV=production -p 3000:3000 tsmx/secure-config-test
-# Container-ID returned
+docker run --d \
+  --env CONFIG_ENCRYPTION_KEY=00000000000000000000000000000000 \
+  --env NODE_ENV=production \
+  -p 3000:3000 \
+  tsmx/secure-config-test
+```
+
+```bash
+curl localhost:3000
 {"test-entry":"test-value-production","__hmac":"b6a06dbae73b1718a3fd38bce9b1343ad0933645f92cc77f33e220e3b3896577"}
 ```
 
-If you want to create a Docker image on your own, the needed dockerfile is provided in the repositories main folder. To build the image simply run:
+If you want to create a Docker image on your own, the needed Dockerfile is provided in the repositories main folder. To build the image simply run:
 
 ```bash
 docker build -t tsmx/secure-config-test .
