@@ -70,18 +70,23 @@ node app.js
 
 ## Testing with Docker
 
-Simply run the provided [image from docker-hub](https://hub.docker.com/r/tsmx/secure-config-test) with the needed environment variables and then call `http//localhost:3000/`.
+Simply run the provided [image from docker-hub](https://hub.docker.com/r/tsmx/secure-config-test) with the needed environment variables and then head over to `http://localhost:3000/` or simply curl it.
 
 For running in Development stage:
 
 ```bash
-docker run --env CONFIG_ENCRYPTION_KEY=00000000000000000000000000000000 -p 3000:3000 tsmx/secure-config-test
+docker run -d --env CONFIG_ENCRYPTION_KEY=00000000000000000000000000000000 -p 3000:3000 tsmx/secure-config-test
+# Container-ID returned
+curl localhost:3000
+{"test-entry":"test-value"}
 ```
 
 For running in Production stage:
 
 ```bash
-docker run --env CONFIG_ENCRYPTION_KEY=00000000000000000000000000000000 --env NODE_ENV=production -p 3000:3000 tsmx/secure-config-test
+docker run --d -env CONFIG_ENCRYPTION_KEY=00000000000000000000000000000000 --env NODE_ENV=production -p 3000:3000 tsmx/secure-config-test
+# Container-ID returned
+{"test-entry":"test-value-production","__hmac":"b6a06dbae73b1718a3fd38bce9b1343ad0933645f92cc77f33e220e3b3896577"}
 ```
 
 If you want to create a Docker image on your own, the needed dockerfile is provided in the repository.
