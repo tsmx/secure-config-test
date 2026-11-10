@@ -108,19 +108,37 @@ docker build -t tsmx/secure-config-test .
 
 ## Testing with Kubernetes
 
-Coming soon...
+The manifests in `k8s/` deploy the service in both stages (Development and Production) as NodePort services. Assuming a running local [minikube](https://minikube.sigs.k8s.io/) cluster:
 
-Temporary hints:
+Create the secret containing the encryption key (used by both deployments):
 
 ```bash
-kubectl create secret generic configuration --from-literal encryptionkey=00000000000000000000000000000000
+kubectl create secret generic configuration \
+  --from-literal=encryptionkey=00000000000000000000000000000000
 ```
 
-```yaml
-env:
-  - name: CONFIG_ENCRYPTION_KEY
-    valueFrom:
-      secretKeyRef:
-        name: configuration
-        key: encryptionkey
+Apply the deployments and services:
+
+```bash
+kubectl apply -f k8s/
+```
+
+The Development deployment just uses the key, the Production deployment additionally sets `NODE_ENV=production` and thus activates HMAC validation.
+
+Then head over to the service or simply curl it, using the IP of your minikube cluster:
+
+```bash
+curl http://$(minikube ip):30003
+{"test-entry":"test-value"}
+
+curl http://$(minikube ip):30033
+{"test-entry":"test-value-production","__hmac":"b6a06dbae73b1718a3fd38bce9b1343ad0933645f92cc77f33e220e3b3896577"}
+```
+
+Alternatively, open the services in your browser via `minikube service secure-config-test-node-port` and `minikube service secure-config-test-prod-node-port`.
+
+If you want to use your own image instead of the one from docker-hub, build it as described above and load it into the cluster:
+
+```bash
+minikube image load tsmx/secure-config-test
 ```
