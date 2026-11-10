@@ -1,6 +1,6 @@
 {
   "name": "secure-config-test",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Test project for using @tsmx/secure-config with Docker/Kubernetes",
   "main": "app.js",
   "author": "tsmx <dev@tsmx.net>",
@@ -9,7 +9,7 @@
     "test": "true"
   },
   "dependencies": {
-    "@tsmx/secure-config": "^2.2.0",
-    "express": "^4.19.0"
+    "@tsmx/secure-config": "^2.5.0",
+    "express": "^5.2.0"
   }
 }
